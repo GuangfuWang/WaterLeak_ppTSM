@@ -9,7 +9,7 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 #define options for custom build targets.
-option(WATERLEAK_TEST "Build fight test program." ON)
+option(WATERLEAK_TEST "Build test program." ON)
 option(WATERLEAK_PREPROCESS_GPU "Use GPU version of preprocessing pipeline" ON)
 set(WATERLEAK_INPUT_NAME "data_batch_0" CACHE STRING "Input layer name for tensorrt deploy.")
 set(WATERLEAK_OUTPUT_NAMES "linear_2.tmp_1" CACHE STRING "Output layer names for tensorrt deploy, seperated with comma or colon")

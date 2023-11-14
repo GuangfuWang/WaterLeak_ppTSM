@@ -9,12 +9,12 @@ namespace waterleak_pptsm {
         //our simple program will only draw letters on top of images.
 		alarm = 0;
         auto flag = static_cast<PostProcessFlag>(m_config->POST_MODE);
-        std::vector<float> fight_res;
-        res->Get(m_config->OUTPUT_NAMES[0], fight_res);
-        Util::softmax(fight_res);
+        std::vector<float> waterleak_res;
+        res->Get(m_config->OUTPUT_NAMES[0], waterleak_res);
+        Util::softmax(waterleak_res);
 
-        m_moving_average.push_back(fight_res[m_config->TARGET_CLASS]);
-//		std::cout<<"RAW: "<<fight_res[m_config->TARGET_CLASS]<<std::endl;
+        m_moving_average.push_back(waterleak_res[m_config->TARGET_CLASS]);
+//		std::cout<<"RAW: "<<waterleak_res[m_config->TARGET_CLASS]<<std::endl;
         float sum=0.0f;
         if (m_moving_average.size()>3){
             for(auto i = m_moving_average.size()-1;i>=m_moving_average.size()-3;--i){

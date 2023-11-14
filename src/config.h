@@ -22,7 +22,7 @@ public:
 	 */
 	void LoadConfigFile(int argc, char **argv, const std::string &file);
 public:
-	std::string MODEL_NAME = "../models/ppTSM_fight.engine";
+	std::string MODEL_NAME = "../models/waterleak20231113.engine";
 	std::string BACKBONE = "ResNet50";
 	std::string VIDEO_FILE;
 	std::string RTSP_SITE = "/url/to/rtsp/site";
@@ -56,7 +56,7 @@ public:
 	int   TEXT_OFF_X = 450;
 	int   TEXT_OFF_Y = 50;
 	std::string POSTPROCESS_NAME = "PpTSMDeployPost";
-	std::string POST_TEXT = "Fight";
+	std::string POST_TEXT = "检测到漏水";
 	std::string POST_TEXT_FONT_FILE = "";
 	bool init = false;
 };
