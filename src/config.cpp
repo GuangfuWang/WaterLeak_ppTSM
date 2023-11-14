@@ -2,15 +2,15 @@
 #include "macro.h"
 #include "util.h"
 
-namespace fight {
+namespace waterleak_pptsm {
 
     void Config::LoadConfigFile(int argc, char **argv, const std::string &file) {
 		if(init)return;
 		init = true;
-        MODEL_NAME = FIGHT_DEPLOY_MODEL;
-        INPUT_NAME = FIGHT_INPUT_NAME;
+        MODEL_NAME = WATERLEAK_DEPLOY_MODEL;
+        INPUT_NAME = WATERLEAK_INPUT_NAME;
         OUTPUT_NAMES.clear();
-		OUTPUT_NAMES = Util::parseNames(FIGHT_OUTPUT_NAMES,' ');
+		OUTPUT_NAMES = Util::parseNames(WATERLEAK_OUTPUT_NAMES,' ');
 
         if (!Util::checkFileExist(file)) {
             std::cerr << "Config file non exists! Aborting..." << std::endl;
@@ -173,7 +173,7 @@ namespace fight {
             MODEL_NAME = ModelName;
         }
 
-        if (!fight::Util::checkFileExist(MODEL_NAME)) {
+        if (!waterleak_pptsm::Util::checkFileExist(MODEL_NAME)) {
             std::cout << MODEL_NAME << std::endl;
             std::cerr << "Model does not exists!" << std::endl;
             std::cerr << "Please check the model path..." << std::endl;

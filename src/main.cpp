@@ -1,9 +1,8 @@
 #include "config.h"
-#include "trt_deploy.h"
 #include "trt_deployresult.h"
 #include "model.h"
 
-using namespace fight;
+using namespace waterleak_pptsm;
 
 /**
  * @example

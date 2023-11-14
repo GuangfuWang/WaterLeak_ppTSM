@@ -5,7 +5,7 @@
 #include "util.h"
 #include "config.h"
 
-namespace fight {
+namespace waterleak_pptsm {
     /**
      * @brief Abstraction of preprocessing operation class, copied.
      * @details this class should be used inside the PreprocessorFactory class.

@@ -1,11 +1,11 @@
 #include "preprocess_util.hpp"
 #include "preprocessor.h"
 
-namespace fight
+namespace waterleak_pptsm
 {
 
 
-#ifdef FIGHT_PREPROCESS_GPU
+#ifdef WATERLEAK_PREPROCESS_GPU
 
 
 void PreprocessorFactory::Init()

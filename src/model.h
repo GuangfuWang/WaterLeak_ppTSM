@@ -1,7 +1,7 @@
 #pragma once
 #include <opencv2/core/core.hpp>
 
-namespace fight {
+namespace waterleak_pptsm {
 
 const int Size_ =  100;
 
@@ -72,4 +72,4 @@ extern void UpdateParams_Algorithm(cvModel *pModel);
 extern void Process_Algorithm(cvModel *pModel, cv::Mat &input_frame);
 extern void Destroy_Algorithm(cvModel *pModel);
 
-} // namespace fight
+} // namespace waterleak_pptsm

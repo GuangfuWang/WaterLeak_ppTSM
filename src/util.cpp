@@ -3,7 +3,7 @@
 #include <iostream>
 #include <valarray>
 
-namespace fight
+namespace waterleak_pptsm
 {
 
 thread_local std::chrono::high_resolution_clock::time_point Util::mTic;

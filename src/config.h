@@ -4,7 +4,7 @@
 #include <yaml-cpp/yaml.h>
 #include "cmdline.h"
 
-namespace fight
+namespace waterleak_pptsm
 {
 /**
  * @brief config class for deployment. should not be derived.
@@ -12,9 +12,9 @@ namespace fight
 class Config final
 {
 public:
-	explicit Config(int argc, char **argv, const std::string &file = "../config/waterleak_detection.yaml");
+	explicit Config(int argc, char **argv, const std::string &file = "../config/waterleak_pptsm.yaml");
 	/**
-	 * @brief loading the config yaml file, default folder is ./weight/fight/waterleak_detection.yaml
+	 * @brief loading the config yaml file, default folder is ./weight/waterleak_pptsm/waterleak_pptsm.yaml
 	 * @param argc terminal arg number.
 	 * @param argv terminal arg values.
 	 * @param file config file full path.
@@ -55,7 +55,7 @@ public:
 	float TEXT_FONT_SIZE = 1.8f;
 	int   TEXT_OFF_X = 450;
 	int   TEXT_OFF_Y = 50;
-	std::string POSTPROCESS_NAME = "FightPpTSMDeployPost";
+	std::string POSTPROCESS_NAME = "PpTSMDeployPost";
 	std::string POST_TEXT = "Fight";
 	std::string POST_TEXT_FONT_FILE = "";
 	bool init = false;

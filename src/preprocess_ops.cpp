@@ -3,7 +3,7 @@
 #include "preprocess_util.hpp"
 #include "preprocessor.h"
 
-namespace fight
+namespace waterleak_pptsm
 {
 
 void NormalizeImage::Run(std::vector<cv::cuda::GpuMat> &data)

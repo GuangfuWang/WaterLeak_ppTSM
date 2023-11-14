@@ -1,7 +1,7 @@
 #include "trt_deployresult.h"
 #include "config.h"
 
-namespace fight
+namespace waterleak_pptsm
 {
 
 void TrtResults::Get(const std::string &idx_name, std::vector<float> &res)

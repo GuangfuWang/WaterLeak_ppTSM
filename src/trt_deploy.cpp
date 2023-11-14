@@ -6,7 +6,7 @@
 #include "trt_deploy.h"
 #include "util.h"
 
-namespace fight {
+namespace waterleak_pptsm {
 
     void Logger::log(nvinfer1::ILogger::Severity severity, const char *msg) noexcept {
         if (severity != Severity::kINFO) {

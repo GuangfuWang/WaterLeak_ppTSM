@@ -2,10 +2,10 @@
 #include "postprocessor.h"
 #include "config.h"
 
-namespace fight {
+namespace waterleak_pptsm {
 
-    void FightPpTSMDeployPost::Run(const SharedRef<TrtResults> &res, const std::vector<cv::Mat> &img,
-                                   std::vector<cv::Mat> &out_img,int & alarm) {
+    void PpTSMDeployPost::Run(const SharedRef<TrtResults> &res, const std::vector<cv::Mat> &img,
+							  std::vector<cv::Mat> &out_img, int & alarm) {
         //our simple program will only draw letters on top of images.
 		alarm = 0;
         auto flag = static_cast<PostProcessFlag>(m_config->POST_MODE);
@@ -31,7 +31,7 @@ namespace fight {
     void Postprocessor::Run(const SharedRef<TrtResults> &res, const std::vector<cv::Mat> &img,
                             std::vector<cv::Mat> &out_img,int& alarm) {
         if (!INIT_FLAG) {
-            m_worker = new FightPpTSMDeployPost(m_config);
+            m_worker = new PpTSMDeployPost(m_config);
             INIT_FLAG = true;
         }
         m_worker->Run(res, img, out_img,alarm);

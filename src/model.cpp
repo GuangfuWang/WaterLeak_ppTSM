@@ -4,7 +4,7 @@
 #include "trt_deployresult.h"
 #include <opencv2/freetype.hpp>
 
-namespace fight
+namespace waterleak_pptsm
 {
 
 
@@ -31,6 +31,7 @@ public:
 	std::vector<cv::Mat> mSampled;
 	std::vector<cv::Mat> mTotal;
 	SharedRef<Config> m_config;
+	cv::Mat m_roi;
 	unsigned int COUNT_LOOP = 0;
 	unsigned int COUNT = 0;
 	unsigned int COUNT_TOTAL = 0;
@@ -44,10 +45,10 @@ void *GenModel(SharedRef<Config> &config)
 	return reinterpret_cast<void *>(model);
 }
 
-cv::Mat genROI(const cv::Mat &im, const std::vector<int> &points, const cv_Point *coords)
+cv::Mat genROI(const cv::Size &s, const std::vector<int> &points, const cv_Point *coords)
 {
-	cv::Mat roi_img = cv::Mat::zeros(im.size(), CV_8UC3);
-	if (points.empty())return cv::Mat(im.size(), CV_8UC3, cv::Scalar(255, 255, 255));
+	cv::Mat roi_img = cv::Mat::zeros(s, CV_8UC3);
+	if (points.empty())return cv::Mat(s, CV_8UC3, cv::Scalar(255, 255, 255));
 	std::vector<std::vector<cv::Point>> contour;
 
 	int sums = 0;
@@ -89,13 +90,13 @@ cvModel *Allocate_Algorithm(cv::Mat &input_frame, int algID, int gpuID)
 	cv::cuda::setDevice(gpuID);
 	cudaSetDevice(gpuID);
 	std::string file;
-	if (Util::checkFileExist("./waterleak_detection.yaml"))
-		file = "./waterleak_detection.yaml";
-	else if (Util::checkFileExist("../config/waterleak_detection.yaml")) {
-		file = "../config/waterleak_detection.yaml";
+	if (Util::checkFileExist("./waterleak_pptsm.yaml"))
+		file = "./waterleak_pptsm.yaml";
+	else if (Util::checkFileExist("../config/waterleak_pptsm.yaml")) {
+		file = "../config/waterleak_pptsm.yaml";
 	}
 	else {
-		std::cout << "Cannot find YAML file!" << std::endl;
+		std::cerr << "Cannot find YAML file!" << std::endl;
 	}
 	auto config = createSharedRef<Config>(0, nullptr, file);
 	auto *ptr = new cvModel();
@@ -117,7 +118,10 @@ void SetPara_Algorithm(cvModel *pModel, int algID)
 
 void UpdateParams_Algorithm(cvModel *pModel)
 {
-	//todo: implement this
+	auto model = reinterpret_cast<InferModel *>(pModel->iModel);
+	auto roi = pModel->p;
+	cv::Size s(pModel->width, pModel->height);
+	model->m_roi = genROI(s, pModel->pointNum, roi);
 }
 
 void Process_Algorithm(cvModel *pModel, cv::Mat &input_frame)
@@ -125,11 +129,13 @@ void Process_Algorithm(cvModel *pModel, cv::Mat &input_frame)
 	pModel->alarm = 0;
 	auto model = reinterpret_cast<InferModel *>(pModel->iModel);
 	auto config = model->m_config;
-
 	auto roi = pModel->p;
-	cv::Mat roi_img = genROI(input_frame, pModel->pointNum, roi);
+	if (model->m_roi.empty()) {
+		model->m_roi = genROI(input_frame.size(), pModel->pointNum, roi);
+	}
+
 	cv::Mat removed_roi;
-	input_frame.copyTo(removed_roi, roi_img);
+	input_frame.copyTo(removed_roi, model->m_roi);
 
 	if (model->COUNT_LOOP < model->COUNT) {
 		if ((model->COUNT_TOTAL % config->SAMPLE_INTERVAL) == 0) {
@@ -152,7 +158,7 @@ void Process_Algorithm(cvModel *pModel, cv::Mat &input_frame)
 		}
 	}
 	if (pModel->alarm || model->latency) {
-		if(model->m_font){
+		if (model->m_font) {
 			model->m_font->putText(input_frame, config->POST_TEXT,
 								   cv::Point(config->TEXT_OFF_X, config->TEXT_OFF_Y),
 								   config->TEXT_FONT_SIZE,
@@ -183,4 +189,4 @@ void Destroy_Algorithm(cvModel *pModel)
 	}
 }
 
-} // namespace fight
+} // namespace waterleak_pptsm

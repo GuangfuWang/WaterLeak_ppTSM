@@ -5,7 +5,7 @@
 #include "trt_deployresult.h"
 #include "util.h"
 
-namespace fight
+namespace waterleak_pptsm
 {
 /**
  * @brief This is a base class for real post processing.
@@ -50,13 +50,13 @@ protected:
 
 /**
  * @brief this is one of real implementation for base class PostprocessorOps.
- * @details this class is used for post processing the fight detection algorithm, specifically the video based one.
+ * @details this class is used for post processing the waterleak_pptsm detection algorithm, specifically the video based one.
  * @note Do NOT use this class in deploy classes, only use this inside Postprocessor classes.
  */
-class FightPpTSMDeployPost final: public PostprocessorOps
+class PpTSMDeployPost final: public PostprocessorOps
 {
 public:
-	explicit FightPpTSMDeployPost(SharedRef<Config>& config): PostprocessorOps(config){};
+	explicit PpTSMDeployPost(SharedRef<Config>& config): PostprocessorOps(config){};
 	void Run(const SharedRef<TrtResults> &res, const std::vector<cv::Mat> &img,
 			 std::vector<cv::Mat> &out_img,int & alarm) override;
 private:

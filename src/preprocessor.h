@@ -7,7 +7,7 @@
 #include "config.h"
 #include "preprocess_ops.h"
 
-namespace fight
+namespace waterleak_pptsm
 {
 
 

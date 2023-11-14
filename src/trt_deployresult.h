@@ -6,7 +6,7 @@
 #include "config.h"
 #include "util.h"
 
-namespace fight
+namespace waterleak_pptsm
 {
 /**
  * @brief This is a class used for storing inference results.
