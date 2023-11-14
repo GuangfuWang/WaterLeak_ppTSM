@@ -44,7 +44,7 @@ int main(int argc, char **argv) {
 		}
 		curr = img.clone();
 		Process_Algorithm(ptr,curr);
-		std::cout<<"Current Res: "<<ptr->alarm<<std::endl;
+//		std::cout<<"Current Res: "<<ptr->alarm<<std::endl;
 		vw.write(curr.clone());
     }
 	cap.release();
