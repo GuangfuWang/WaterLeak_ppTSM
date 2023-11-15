@@ -14,7 +14,7 @@ namespace waterleak_pptsm {
         Util::softmax(waterleak_res);
 
         m_moving_average.push_back(waterleak_res[m_config->TARGET_CLASS]);
-//		std::cout<<"RAW: "<<waterleak_res[m_config->TARGET_CLASS]<<std::endl;
+
         float sum=0.0f;
         if (m_moving_average.size()>3){
             for(auto i = m_moving_average.size()-1;i>=m_moving_average.size()-3;--i){
@@ -25,7 +25,10 @@ namespace waterleak_pptsm {
 			m_moving_average.erase(it);
         }
 //		std::cout<<"Curr Frame: "<<sum<<std::endl;
-		if(sum>=m_config->THRESHOLD)alarm = 1;
+		if(sum>=m_config->THRESHOLD){
+			alarm = 1;
+//			std::cout<<"RAW: "<<waterleak_res[m_config->TARGET_CLASS]<<std::endl;
+		}
     }
 
     void Postprocessor::Run(const SharedRef<TrtResults> &res, const std::vector<cv::Mat> &img,

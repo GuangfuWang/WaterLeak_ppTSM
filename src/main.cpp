@@ -13,7 +13,7 @@ using namespace waterleak_pptsm;
 
 int main(int argc, char **argv) {
     //prepare the input data.
-	auto video_file = "/home/wgf/Downloads/datasets/waterleak/10-24-35.mp4";
+	auto video_file = "/home/wgf/Downloads/datasets/waterleak/leak002.mp4";
 	if(!Util::checkFileExist(video_file)){
 		std::cerr<<"Given Video file does not exists..."<<std::endl;
 		return 0;
@@ -43,7 +43,7 @@ int main(int argc, char **argv) {
 		}
 		curr = img.clone();
 		Process_Algorithm(ptr,curr);
-//		std::cout<<"Current Res: "<<ptr->alarm<<std::endl;
+		std::cout<<"Current Res: "<<ptr->alarm<<std::endl;
 		vw.write(curr.clone());
     }
 	cap.release();
