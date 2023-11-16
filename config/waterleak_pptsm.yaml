@@ -15,7 +15,7 @@ PIPELINE:
   SAMPLE_INTERVAL: 1 # under which we will sample an image.
   TRIGGER_LEN: 8 # trigger a detection
   BATCH_SIZE: 1 # for now only 1 is supported. for video input [B,N,C,H,W] e.g. [1,8,3,320,320]
-  THRESHOLD: 0.7
+  THRESHOLD: 0.73
   TARGET_CLASS: 0 # task dependent. for waterleak task, 0--leak, 1--noleak.
   ENABLE_SCALE: True
   KEEP_RATIO: True
